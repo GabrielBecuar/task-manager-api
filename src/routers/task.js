@@ -3,8 +3,6 @@ const Task = require('../models/task')
 const auth = require('../middleware/auth')
 const router = new express.Router()
 
-
-
 router.post('/tasks',auth, async(req, res)=>{
     const task = new Task({
         ...req.body,
@@ -16,7 +14,6 @@ router.post('/tasks',auth, async(req, res)=>{
     }catch(e){
         res.status(400).send(e)
     }
-
 })
 
 //GET /task?completed=true
@@ -49,7 +46,6 @@ router.get('/tasks',auth,async(req, res)=>{
     }catch(e){
         res.status(500).send()
     }
-
 })
 
 router.get('/tasks/:id',auth,async(req, res)=>{
@@ -67,10 +63,7 @@ router.get('/tasks/:id',auth,async(req, res)=>{
         res.status(500).send()
     }
 
-
-
 })
-
 
 router.patch('/tasks/:id',auth,async(req,res)=>{
     const updates = Object.keys(req.body)
@@ -96,7 +89,6 @@ router.patch('/tasks/:id',auth,async(req,res)=>{
     }
 })
 
-
 router.delete('/tasks/me', auth,async(req,res)=>{
     try{
         await req.user.remove()
@@ -105,6 +97,5 @@ router.delete('/tasks/me', auth,async(req,res)=>{
         res.status(500).send()
     }
 })
-
 
 module.exports = router 
